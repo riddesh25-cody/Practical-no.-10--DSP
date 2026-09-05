@@ -1,0 +1,55 @@
+# Queue for task scheduling (FIFO)
+task_queue = deque()
+
+# Stack for undo operations (LIFO)
+undo_stack = []
+
+def add_task(task):
+task_queue.append(task)
+print(f&quot;Task added: {task}&quot;)
+
+def process_task():
+if task_queue:
+task = task_queue.popleft()
+undo_stack.append(task)
+print(f&quot;Processed task: {task}&quot;)
+else:
+print(&quot;No tasks to process&quot;)
+
+def undo_task():
+if undo_stack:
+task = undo_stack.pop()
+print(f&quot;Undo last processed task: {task}&quot;)
+else:
+print(&quot;Nothing to undo&quot;)
+
+def show_tasks():
+print(&quot;\nPending Tasks (Queue):&quot;, list(task_queue))
+print(&quot;Undo Stack:&quot;, undo_stack)
+
+# ==============================
+# MENU DRIVEN PROGRAM
+# ==============================
+while True:
+print(&quot;\n====== TASK MANAGER ======&quot;)
+print(&quot;1. Add Task&quot;)
+print(&quot;2. Process Task&quot;)
+print(&quot;3. Undo Task&quot;)
+print(&quot;4. Show Tasks&quot;)
+print(&quot;5. Exit&quot;)
+choice = input(&quot;Enter choice: &quot;)
+
+if choice == &quot;1&quot;:
+task = input(&quot;Enter task: &quot;)
+add_task(task)
+elif choice == &quot;2&quot;:
+process_task()
+elif choice == &quot;3&quot;:
+undo_task()
+elif choice == &quot;4&quot;:
+show_tasks()
+elif choice == &quot;5&quot;:
+print(&quot;Exiting system...&quot;)
+break
+else:
+print(&quot;Invalid choice&quot;)
